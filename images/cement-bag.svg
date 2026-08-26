@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120">
+  <path d="M20 20 L80 20 L88 110 Q50 118 12 110 Z" fill="#DEDAD1" stroke="#191B1D" stroke-width="3"/>
+  <path d="M20 20 L28 8 L72 8 L80 20 Z" fill="#B7B0A2" stroke="#191B1D" stroke-width="3"/>
+  <rect x="26" y="46" width="48" height="30" fill="#FF5A1F"/>
+  <text x="50" y="67" font-family="IBM Plex Mono, monospace" font-size="14" fill="#191B1D" text-anchor="middle" font-weight="700">М500</text>
+  <line x1="18" y1="90" x2="82" y2="90" stroke="#191B1D" stroke-width="2" stroke-dasharray="4 3"/>
+</svg>
