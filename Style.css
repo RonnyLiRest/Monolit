@@ -1,0 +1,385 @@
+/* МОНОЛИТ — стройматериалы. Общая таблица стилей (Style.css) */
+
+:root{
+  --concrete-light:#DEDAD1;
+  --concrete-mid:#B7B0A2;
+  --steel-dark:#191B1D;
+  --steel-mid:#2C3033;
+  --steel-line:#42474B;
+  --safety-orange:#FF5A1F;
+  --safety-yellow:#FFC845;
+  --paper:#F5F3ED;
+  --ink:#191B1D;
+  --ok-green:#3E7B4F;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:'Oswald',sans-serif;
+  text-transform:uppercase;
+  letter-spacing:0.02em;
+}
+.mono{font-family:'IBM Plex Mono',monospace;}
+a{color:inherit; text-decoration:none;}
+img,svg{max-width:100%; display:block;}
+button{font-family:inherit; cursor:pointer; border:none;}
+:focus-visible{outline:3px solid var(--safety-orange); outline-offset:2px;}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+/* ---------- MICRO-INTERACTIONS: клики и наведение на кнопках/карточках ---------- */
+button, .btn-primary, .btn-outline, .btn-add, .btn-add-lg, .btn-calc, .btn-login,
+.cart-btn, .vehicle-btn, .cat-card, .prod-card, .usp-card{
+  transition: transform .12s ease, background-color .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+button:active, .btn-primary:active, .btn-outline:active, .btn-add:active, .btn-add-lg:active,
+.btn-calc:active, .btn-login:active, .cart-btn:active, .vehicle-btn:active{
+  transform: scale(0.96);
+}
+.prod-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 22px rgba(25,27,29,0.12); }
+@keyframes cartBump{
+  0%{ transform: scale(1); }
+  35%{ transform: scale(1.18); }
+  100%{ transform: scale(1); }
+}
+.cart-btn.bump{ animation: cartBump .35s ease; }
+
+/* ---------- HAZARD STRIPE DIVIDER ---------- */
+.hazard{
+  height:14px;
+  background:repeating-linear-gradient(-45deg, var(--steel-dark) 0 18px, var(--safety-yellow) 18px 36px);
+}
+
+/* ---------- HEADER + DROPDOWN NAV (контекстное меню) ---------- */
+header{
+  background:var(--steel-dark); color:var(--paper);
+  position:sticky; top:0; z-index:100;
+  border-bottom:1px solid var(--steel-line);
+}
+.header-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 28px; max-width:1180px; margin:0 auto;
+}
+.logo{display:flex; align-items:center; gap:10px; font-family:'Oswald',sans-serif; font-size:21px; font-weight:700; letter-spacing:.03em;}
+.logo img{width:26px; height:26px;}
+nav{display:flex; gap:8px;}
+nav > a, .has-dropdown > button{
+  font-size:14px; font-weight:500; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--concrete-mid); padding:10px 14px; background:none; transition:color .15s ease;
+}
+nav > a:hover, .has-dropdown:hover > button, .has-dropdown > button:focus-visible{color:var(--paper);}
+.has-dropdown{position:relative;}
+.dropdown{
+  position:absolute; top:100%; left:0; min-width:240px;
+  background:var(--steel-mid); border:1px solid var(--steel-line);
+  padding:8px; display:none; flex-direction:column; gap:2px;
+  box-shadow:0 12px 24px rgba(0,0,0,.35);
+}
+.has-dropdown:hover .dropdown, .has-dropdown:focus-within .dropdown{display:flex;}
+.dropdown a{
+  padding:10px 12px; font-size:13px; color:var(--concrete-mid);
+  display:flex; justify-content:space-between; border-left:2px solid transparent;
+}
+.dropdown a:hover{color:var(--paper); border-left-color:var(--safety-orange); background:rgba(255,255,255,.03);}
+.dropdown a span{font-family:'IBM Plex Mono',monospace; font-size:11px; color:#6a6f73;}
+.header-right{display:flex; align-items:center; gap:16px;}
+.phone{font-family:'IBM Plex Mono',monospace; font-size:14px;}
+.btn-login{background:transparent; border:1.5px solid var(--steel-line); color:var(--paper); padding:9px 16px; font-size:13px; font-weight:500; text-transform:uppercase; letter-spacing:.03em; max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.btn-login:hover{border-color:var(--paper);}
+.cart-btn{background:var(--safety-orange); color:var(--steel-dark); font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.03em; padding:10px 16px;}
+.cart-btn:hover{background:var(--safety-yellow);}
+@media (max-width: 1100px) { .logo { font-size: 19px; gap: 8px; } nav > a, .has-dropdown > button { padding: 8px 10px; font-size: 12px; } .phone { font-size: 13px; } .cart-btn { font-size: 12px; padding: 9px 12px } .btn-login { font-size: 12px; padding: 9px 12px } .header-right { gap: 8px; }}
+@media (max-width: 860px) { .phone { display: none; } .logo { font-size: 17px; gap: 6px;} .logo img { width: 24px; height: 24px; } .header-inner { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; padding: 12px 28px; align-items: center;} nav {display: flex;flex-direction: row;flex-wrap: wrap;gap: 4px;justify-content: flex;position: static;}}
+@media (max-width: 540px) {.logo { font-size: 16px; gap: 5px;} .logo img { width: 22px; height: 22px; }.btn-login { padding: 8px 11px } .cart-btn { padding: 8px 11px; } .header-right {width: 100%; justify-content: center; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;}}
+
+/* ---------- BREADCRUMBS ---------- */
+.breadcrumbs{padding:16px 0; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8a8478;}
+.breadcrumbs a:hover{color:var(--safety-orange);}
+
+/* ---------- HERO (index) — блок с абсолютным позиционированием ---------- */
+.hero{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(222,218,209,0.0) 0%, var(--paper) 100%),
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(25,27,29,0.08) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgba(25,27,29,0.08) 39px 40px),
+    var(--concrete-light);
+  padding:72px 0 0 0;
+  overflow:hidden;
+  min-height:560px;
+}
+.hero-inner{
+  position:relative; z-index:5;
+  max-width:1180px; margin:0 auto; padding:0 28px 64px;
+  display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:end;
+}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--safety-orange); letter-spacing:.08em; text-transform:uppercase; margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+.eyebrow::before{content:''; width:22px; height:2px; background:var(--safety-orange);}
+h1{font-size:clamp(34px,5vw,58px); line-height:1.02; font-weight:700; margin-bottom:20px;}
+h1 .accent{color:var(--safety-orange);}
+.hero p{font-size:16px; line-height:1.55; color:#494540; max-width:460px; margin-bottom:28px;}
+.hero-ctas{display:flex; gap:14px;}
+.btn-primary{background:var(--steel-dark); color:var(--paper); padding:15px 26px; font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; display:inline-block; transition:background .15s ease;}
+.btn-primary:hover{background:var(--safety-orange); color:var(--steel-dark);}
+.btn-outline{background:transparent; color:var(--ink); padding:15px 26px; font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; border:1.5px solid var(--ink); display:inline-block;}
+.btn-outline:hover{background:var(--ink); color:var(--paper);}
+/* --- Визитка компании --- */
+.hero-plate{position:relative; z-index:5; background:var(--steel-dark); color:var(--paper); padding:24px; border-left:5px solid var(--safety-orange); max-width:400px;}
+.hero-plate .mono{font-size:12px; color:var(--concrete-mid); letter-spacing:.05em; margin-bottom:12px; display:block;}
+.plate-row{display:flex; justify-content:space-between; align-items:baseline; padding:11px 0; border-bottom:1px solid var(--steel-line);}
+.plate-rows .plate-row:last-child{border-bottom:none;}
+.plate-row .label{font-size:13px; color:var(--concrete-mid);}
+.plate-row .note{font-size:16px; line-height:1.6; color:var(--concrete-mid); margin:0;}
+.plate-row .val{font-family:'IBM Plex Mono',monospace; font-size:19px; font-weight:600;}
+.plate-note{font-size:13px; line-height:1.6; color:var(--concrete-mid); margin:0;}
+.plate-note + .plate-note{margin-top:8px;}
+.plate-note:first-of-type{margin-top:16px; padding-top:16px; border-top:1px solid var(--steel-line);}
+
+/* ---------- SECTIONS / CATEGORIES ---------- */
+.section{padding:64px 0;}
+.section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:32px; gap:20px; flex-wrap:wrap;}
+.section-head h2{font-size:28px; font-weight:600;}
+.cat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--steel-line); border:2px solid var(--steel-dark);}
+.cat-card{background:var(--paper); padding:30px 22px; display:flex; flex-direction:column; gap:12px; transition:background .15s ease; position:relative; overflow:hidden;}
+.cat-card:hover{background:var(--concrete-light);}
+.cat-card:hover .cat-illustration{transform:rotate(0deg) scale(1.05);}
+/* иллюстрация категории — абсолютное позиционирование в углу карточки */
+.cat-illustration{position:absolute; width:60px; top:16px; right:16px; opacity:.95; transform:rotate(-6deg); transition:transform .2s ease; filter:drop-shadow(0 6px 8px rgba(0,0,0,.15));}
+.cat-card h3{font-size:16px; font-weight:600; max-width:75%;}
+.cat-card .count{font-family:'IBM Plex Mono',monospace; font-size:13px; color:#7a746a;}
+
+/* ---------- PRODUCTS (spec-sheet cards) ---------- */
+.prod-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.prod-card{background:var(--paper); border:1.5px solid var(--steel-dark); position:relative; padding:22px; cursor:pointer;}
+.prod-card::before,.prod-card::after,.prod-card .bolt-tl,.prod-card .bolt-br{content:''; position:absolute; width:7px; height:7px; background:var(--steel-dark); border-radius:50%;}
+.prod-card::before{top:10px; left:10px;}
+.prod-card::after{bottom:10px; right:10px;}
+.prod-card .bolt-tl{top:10px; right:10px;}
+.prod-card .bolt-br{bottom:10px; left:10px;}
+.tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em; padding:4px 9px; margin-bottom:14px;}
+.tag.ok{background:var(--ok-green); color:var(--paper);}
+.tag.order{background:var(--concrete-mid); color:var(--steel-dark);}
+.prod-card h3{font-size:17px; font-weight:600; margin-bottom:4px; text-transform:none; font-family:'Inter',sans-serif;}
+.prod-card a.title-link:hover{color:var(--safety-orange);}
+.title-link.stretched-link::after{content:""; position:absolute; inset:0; z-index:1;}
+.prod-card .btn-add, .prod-card .btn-add-lg{position:relative; z-index:2;}
+.prod-card:has(.stretched-link){cursor:pointer;}
+.sku{font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8a8478; margin-bottom:10px;}
+.prod-desc-short{font-size:12.5px; line-height:1.5; color:#6a655c; margin-bottom:14px;}
+/* заглушка фото товара — заменить на реальные фотографии позже num aspect-ratio:4/3; margin-bottom:14px; border:1px dashed var(--steel-line); background:repeating-linear-gradient(45deg, var(--concrete-light) 0 10px, #d3cdc1 10px 20px); display:flex; align-items:center; justify-content:center; color:#8a8478; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em; text-align:center; padding:10px; */
+.prod-photo{aspect-ratio: 4/3;margin-bottom: 14px;border: 1px solid var(--steel-line); background: #ffffff;   display: flex;align-items: center;justify-content: center;overflow: hidden;}
+.prod-photo img {width: 100%; height: 100%; object-fit: contain;}
+.prod-photo-fill img {object-fit: cover;}
+.spec-table{margin-bottom:16px;}
+.spec-row{display:flex; justify-content:space-between; font-size:13px; padding:6px 0; border-bottom:1px dashed var(--concrete-mid);}
+.spec-row .k{color:#7a746a;}
+.spec-row .v{font-family:'IBM Plex Mono',monospace; font-weight:500;}
+.prod-foot{display:flex; justify-content:space-between; align-items:center; margin-top:6px;}
+.price{font-family:'IBM Plex Mono',monospace; font-size:21px; font-weight:600;}
+.price .unit{font-size:12px; color:#8a8478; font-weight:400;}
+.old-price{font-family:'IBM Plex Mono',monospace; font-size:14px; color:#9a948a; text-decoration:line-through; font-weight:400; margin-right:8px;}
+.btn-add{background:var(--steel-dark); color:var(--paper); padding:10px 16px; font-size:13px; font-weight:600; text-transform:uppercase;}
+.btn-add:hover{background:var(--safety-orange); color:var(--steel-dark);}
+
+/* ---------- USP ---------- */
+.usp-section{background:var(--steel-dark); color:var(--paper);}
+
+.usp-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--steel-line);}
+.usp-card{background:var(--steel-dark); padding:30px;}
+.usp-card:first-child {padding-left: 0;}
+.usp-card:last-child {padding-right: 0;}
+.usp-card .idx{font-family:'IBM Plex Mono',monospace; color:var(--safety-orange); font-size:13px; margin-bottom:12px; display:block;}
+.usp-card h3{font-size:15px; font-weight:600; margin-bottom:8px; text-transform:none; font-family:'Inter',sans-serif;}
+.usp-card p{font-size:13px; color:var(--concrete-mid); line-height:1.5;}
+
+/* ---------- CTA BANNER ---------- */
+.cta-banner{background:var(--concrete-light); padding:52px 0;}
+.cta-inner{display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;}
+.cta-inner h2{font-size:24px; font-weight:600; max-width:480px;}
+
+/* ---------- PRODUCT PAGE ---------- */
+.product-view{display:grid; grid-template-columns:1fr 1fr; gap:48px; padding:20px 0 60px;}
+.product-gallery{background:#ffffff; border:2px solid var(--steel-dark); aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;}
+.product-gallery img {width: 100%; height: 100%; object-fit: contain;}
+.product-gallery-fill img {object-fit: cover;}
+.product-gallery svg{width:55%;}
+.product-gallery .badge{position:absolute; top:16px; left:16px;}
+.product-info h1{font-size:32px; margin-bottom:10px;}
+.product-info .sku{margin-bottom:18px;}
+.product-price{font-family:'IBM Plex Mono',monospace; font-size:34px; font-weight:700; margin:18px 0;}
+.product-price .unit{font-size:14px; color:#8a8478; font-weight:400;}
+.product-desc{font-size:15px; line-height:1.7; color:#3a362f; margin-bottom:24px;}
+.spec-block{border:1.5px solid var(--steel-dark); margin-bottom:24px;}
+.spec-block .head{background:var(--steel-dark); color:var(--paper); padding:10px 16px; font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.05em;}
+.spec-block .spec-row{padding:12px 16px; font-size:14px;}
+.qty-row{display:flex; gap:14px; align-items:center; margin-bottom:20px;}
+.qty-control{display:flex; border:1.5px solid var(--steel-dark);}
+.qty-control button{width:38px; height:44px; background:var(--paper); font-size:16px;}
+.qty-control button:hover{background:var(--concrete-light);}
+.qty-control input{width:52px; text-align:center; border:none; border-left:1.5px solid var(--steel-dark); border-right:1.5px solid var(--steel-dark); font-family:'IBM Plex Mono',monospace; font-size:15px;}
+.btn-add-lg{background:var(--steel-dark); color:var(--paper); padding:16px 30px; font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; flex:1;}
+.btn-add-lg:hover{background:var(--safety-orange); color:var(--steel-dark);}
+
+/* ---------- PRODUCT PAGE ---------- */
+.product-media{display:flex; flex-direction:column;}
+
+/* ---------- CATEGORY LISTING PAGE ---------- */
+.category-layout{display:grid; grid-template-columns:250px 1fr; gap:36px; padding:8px 0 60px;}
+.cat-sidebar{display:flex; flex-direction:column; gap:2px; border:1.5px solid var(--steel-dark); padding:6px; align-self:start; position:sticky; top:88px;}
+.cat-sidebar a{display:flex; justify-content:space-between; gap:8px; padding:12px 14px; font-size:13px; border-left:3px solid transparent; color:#4a453d;}
+.cat-sidebar a:hover{background:var(--concrete-light); color:var(--ink);}
+.cat-sidebar a.active{border-left-color:var(--safety-orange); background:var(--concrete-light); color:var(--ink); font-weight:600;}
+.cat-sidebar a span{font-family:'IBM Plex Mono',monospace; font-size:11px; color:#9a948a;}
+.category-content h1{font-size:26px; margin-bottom:6px;}
+.category-content .count-line{font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8a8478; margin-bottom:26px; display:block;}
+.category-products{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+@media (max-width:860px){
+  .category-layout{grid-template-columns:1fr;}
+  .cat-sidebar{position:static; flex-direction:row; flex-wrap:wrap; gap:2px;}
+  .category-products{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:540px){ .category-products{grid-template-columns:1fr;} }
+
+/* ---------- DELIVERY PAGE ---------- */
+.delivery-view{padding:20px 28px 60px;}
+.delivery-intro{max-width:640px; margin-bottom:36px;}
+.delivery-intro p{font-size:15px; line-height:1.6; color:#494540;}
+.delivery-layout{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start;}
+.delivery-layout > div{min-width:0;}
+.delivery-form{border:1.5px solid var(--steel-dark); padding:26px;}
+.delivery-form label{display:block; font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:#8a8478; margin-bottom:8px;}
+.delivery-form input[type=text]{width:100%; padding:13px 14px; border:1.5px solid var(--steel-dark); font-family:'Inter',sans-serif; font-size:14px; margin-bottom:6px; background:var(--paper);}
+.delivery-form input[type=text]:focus-visible{outline:2px solid var(--safety-orange); outline-offset:-2px;}
+.delivery-hint{font-size:12px; color:#8a8478; margin-bottom:18px; display:block;}
+.vehicle-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:20px;}
+
+/* ---------- ЧЕКАУТ: способ получения (самовывоз/доставка) ---------- */
+.fulfillment-toggle{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px;}
+.fulfillment-btn{border:1.5px solid var(--steel-dark); background:var(--paper); padding:12px; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; color:var(--ink);}
+.fulfillment-btn:hover{background:var(--concrete-light);}
+.fulfillment-btn.active{background:var(--safety-orange); border-color:var(--safety-orange); color:var(--steel-dark);}
+.pickup-info{border:1.5px solid var(--steel-dark); padding:14px 16px; font-size:13px; line-height:1.55; color:#3a362f; margin-bottom:16px;}
+.pickup-info strong{font-weight:600;}
+.vehicle-grid-sm{margin-bottom:12px;}
+.vehicle-grid-sm .vehicle-btn{padding:10px 4px;}
+.vehicle-grid-sm .vt-capacity{font-size:13px;}
+.vehicle-grid-sm .vt-label{font-size:9px;}
+.vehicle-btn{border:1.5px solid var(--steel-dark); background:var(--paper); padding:14px 6px; display:flex; flex-direction:column; align-items:center; gap:4px; transition:background .12s ease;}
+.vehicle-btn .vt-capacity{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:15px; color:var(--ink);}
+.vehicle-btn .vt-label{font-size:10px; text-transform:uppercase; letter-spacing:.03em; color:#8a8478;}
+.vehicle-btn:hover{background:var(--concrete-light);}
+.vehicle-btn.active{background:var(--safety-orange); border-color:var(--safety-orange);}
+.vehicle-btn.active .vt-capacity{color:var(--steel-dark);}
+.vehicle-btn.active .vt-label{color:var(--steel-dark);}
+.delivery-error{color:#B23A2E; font-size:13px; margin:-8px 0 14px; display:none;}
+.delivery-error.show{display:block;}
+.delivery-result{border:1.5px solid var(--steel-dark); margin-top:22px; display:none;}
+.delivery-result.show{display:block;}
+.delivery-result .head{background:var(--steel-dark); color:var(--paper); padding:10px 16px; font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.05em;}
+.delivery-result .row{display:flex; justify-content:space-between; padding:13px 16px; font-size:14px; border-bottom:1px dashed var(--concrete-mid);}
+.delivery-result .row:last-child{border-bottom:none;}
+.delivery-result .row .val{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px;}
+.map-box{border:2px solid var(--steel-dark); height:420px; position:relative; background:var(--concrete-light);}
+.map-box > ymaps{font-family:'Inter',sans-serif;}
+/*.map-caption{font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8a8478; margin-top:10px;}sub*/
+.map-box,
+.map-frame {width: 100%; max-width: 100%; overflow: hidden;}
+@media (max-width:860px){ .delivery-layout{grid-template-columns:1fr;} .map-box{height:320px;} .vehicle-grid{grid-template-columns:repeat(2,1fr);} }
+
+
+/* ---------- CONTACTS PAGE ---------- */
+.contacts-view{display:grid; grid-template-columns:1fr 1fr; gap:48px; padding:20px 0 60px;}
+.slogan-plate{background:var(--steel-dark); color:var(--paper); padding:30px; border-left:5px solid var(--safety-orange); margin-bottom:28px;}
+.slogan-plate p{font-family:'Oswald',sans-serif; text-transform:uppercase; font-size:22px; line-height:1.3;}
+.contact-row{display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--concrete-mid);}
+.contact-row .k{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--safety-orange); text-transform:uppercase; width:120px; flex-shrink:0; padding-top:2px;}
+.contact-row .v{font-size:15px; line-height:1.5;}
+.map-frame{background:var(--concrete-light); border:2px solid var(--steel-dark); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; color:#8a8478; font-family:'IBM Plex Mono',monospace; font-size:13px; text-align:center; padding:20px;}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--steel-dark); color:var(--concrete-mid); padding:52px 0 26px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:32px; padding-bottom:36px; border-bottom:1px solid var(--steel-line); margin-bottom:22px;}
+.foot-grid h4{color:var(--paper); font-size:13px; text-transform:uppercase; letter-spacing:.05em; margin-bottom:14px; font-family:'Inter',sans-serif; font-weight:600;}
+.foot-grid a,.foot-grid p{font-size:14px; line-height:2; color:var(--concrete-mid);}
+.foot-grid a:hover{color:var(--paper);}
+.foot-logo{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+.foot-logo img{width:22px; height:22px;}
+.foot-logo span{font-family:'Oswald',sans-serif; font-size:17px; font-weight:700; color:var(--paper);}
+.foot-bottom{display:flex; justify-content:space-between; font-size:12px; font-family:'IBM Plex Mono',monospace; color:#6a6f73; flex-wrap:wrap; gap:8px;}
+
+@media (max-width:860px){
+  .hero-inner{grid-template-columns:1fr;}
+  .cat-grid,.prod-grid{grid-template-columns:1fr 1fr;}
+  .usp-grid{grid-template-columns:1fr 1fr;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+  .product-view,.contacts-view{grid-template-columns:1fr;}
+}
+@media (max-width:540px){
+  .cat-grid,.prod-grid,.usp-grid,.foot-grid{grid-template-columns:1fr;}
+  .cta-inner{flex-direction:column; align-items:flex-start;}
+}
+
+/* ---------- МОДАЛЬНЫЕ ОКНА: авторизация и корзина ---------- */
+.modal-overlay{position:fixed; inset:0; background:rgba(25,27,29,0.55); z-index:200; display:none;}
+.modal-overlay.open{display:block;}
+.modal{
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:var(--paper); border:2px solid var(--steel-dark); width:min(420px, calc(100vw - 40px));
+  max-height:calc(100vh - 60px); overflow-y:auto; padding:32px 28px; z-index:201; display:none;
+}
+.modal.open{display:block;}
+.modal-close{position:absolute; top:14px; right:14px; background:none; font-size:22px; line-height:1; color:#8a8478; width:32px; height:32px;}
+.modal-close:hover{color:var(--ink);}
+.modal-title{font-size:20px; margin-bottom:20px;}
+.modal-tabs{display:flex; border-bottom:1.5px solid var(--steel-dark); margin-bottom:22px;}
+.modal-tab{flex:1; background:none; padding:12px; font-size:13px; text-transform:uppercase; letter-spacing:.03em; color:#8a8478; border-bottom:2px solid transparent; margin-bottom:-1.5px;}
+.modal-tab.active{color:var(--ink); border-bottom-color:var(--safety-orange); font-weight:600;}
+.modal-form label{display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#8a8478; margin-bottom:6px; margin-top:14px;}
+.modal-form label:first-of-type{margin-top:0;}
+.modal-form input[type=text], .modal-form input[type=password], .modal-form input[type=email]{
+  width:100%; padding:12px 13px; border:1.5px solid var(--steel-dark); font-family:'Inter',sans-serif; font-size:14px; background:var(--paper);
+}
+.modal-form input:focus-visible{outline:2px solid var(--safety-orange); outline-offset:-2px;}
+.modal.modal-wide{width:min(480px, calc(100vw - 40px));}
+.field-error{color:#B23A2E; font-size:12px; margin-top:5px; min-height:1px; display:none;}
+.field-error.show{display:block;}
+.form-msg{font-size:13px; margin:14px 0; display:none;}
+.form-msg.show{display:block;}
+
+.cart-item{display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px dashed var(--concrete-mid);}
+.cart-item-info{flex:1; min-width:0;}
+.cart-item-name{font-size:13.5px; font-weight:600; margin-bottom:3px;}
+.cart-item-price{font-size:12px; color:#8a8478;}
+.cart-item-qty{display:flex; align-items:center; border:1.5px solid var(--steel-dark); flex-shrink:0;}
+.cart-item-qty button{width:26px; height:28px; background:var(--paper); font-size:14px;}
+.cart-item-qty button:hover{background:var(--concrete-light);}
+.cart-item-qty .qty-val{width:26px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:13px;}
+.cart-item-remove{background:none; color:#8a8478; font-size:18px; width:24px; height:24px; flex-shrink:0;}
+.cart-item-remove:hover{color:#B23A2E;}
+.cart-empty{font-size:13.5px; color:#8a8478; padding:20px 0; display:none;}
+.cart-empty.show{display:block;}
+.cart-summary-row{display:flex; justify-content:space-between; padding:14px 0; font-size:15px; font-weight:600; border-top:1.5px solid var(--steel-dark); margin-top:6px;}
+.cart-item-qty .qty-val{width:26px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:13px; border:none; background:transparent; padding:0;}
+.cart-item-qty .qty-val:focus-visible{outline:2px solid var(--safety-orange); outline-offset:1px;}
+
+/* ---------- ОКНО АККАУНТА: строки данных и история заказов ---------- */
+.account-row{display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px dashed var(--concrete-mid); font-size:14px;}
+.account-row .k{color:#8a8478; flex-shrink:0;}
+.account-row .v{font-weight:600; text-align:right; word-break:break-word;}
+.account-subtitle{font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:#8a8478; margin-top:26px; margin-bottom:12px;}
+
+.order-list{max-height:280px; overflow-y:auto; margin-bottom:4px;}
+.order-card{border:1.5px solid var(--steel-dark); padding:14px 16px; margin-bottom:10px;}
+.order-card:last-child{margin-bottom:0;}
+.order-head{display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8a8478; margin-bottom:8px;}
+.order-items{font-size:13px; color:#3a362f; line-height:1.5; margin-bottom:10px;}
+.order-meta{margin-bottom:10px;}
+.order-tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.05em; padding:3px 8px; background:var(--concrete-light); color:var(--ink);}
+.order-total{display:flex; justify-content:space-between; font-weight:600; font-size:14px; border-top:1px dashed var(--concrete-mid); padding-top:10px;}
+.order-empty{font-size:13px; color:#8a8478; padding:6px 0;}
+@media (max-width:540px){ .modal{padding:26px 20px;} }
